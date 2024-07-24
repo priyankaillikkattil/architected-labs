@@ -1,0 +1,5 @@
+FROM mysql/mysql-server:latest
+
+ADD ./thecloud.sql /docker-entrypint-initdb.d
+
+EXPOSE 3308

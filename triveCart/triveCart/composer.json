@@ -1,0 +1,14 @@
+{
+    "name": "architech-labs/code-test",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "phpstan/phpstan": "^1.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Models\\": "src/Models/",
+            "Controllers\\": "src/Controllers/",
+            "Views\\": "src/Views/"
+        }
+    }
+}

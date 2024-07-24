@@ -1,0 +1,47 @@
+version: '3'
+services:
+
+  #PHP App
+  app:
+   
+    build:
+      context: .
+      dockerfile: docker/php
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+  
+    volumes:
+      - ./triveCart:/var/www/html
+     
+    
+    depends_on:
+      - db_mysql
+   
+  db_mysql:
+   
+    image: mysql/mysql-server:latest
+  
+    environment:
+            - MYSQL_DATABASE=test
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=password
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_TCP_PORT= 3306
+    ports:
+      - "3313:3306"
+    
+  nginx-cld:
+    image: nginx:alpine
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8200:80"
+    volumes:
+      - ./triveCart:/var/www/html
+      - ./config/conf.d/:/etc/nginx/conf.d/
+      
+   
+
